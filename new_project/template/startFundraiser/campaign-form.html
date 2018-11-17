@@ -1,0 +1,34 @@
+
+{% extends 'startFundraiser/base.html' %}
+{% block title %}Start a Campaign{% endblock %}
+{% load widget_tweaks %}
+
+{% block content %}
+<h1 style="width:80%;margin:auto;">Start Your Campaign!</h1>
+  <p style="width:80%;margin:auto;">Introduce your campaign providing fundamental details.</p><br><br>
+  <form method="post" enctype="multipart/form-data" action="#">
+    {% csrf_token %}
+    <div style="width:80%;margin:auto;">
+    {% for field in form %}
+      <div class="form-group">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label><br>
+        <h6>{{ field.help_text }} </h6>
+        {% render_field field|add_class:'form-control custom-class' placeholder=field.placeholder %}
+        {% for error in field.errors %}
+          <span class="help-block">{{ error }}</span>
+        {% endfor %}
+      </div>
+      <br><br><br>
+    {% endfor %}
+    </div>
+   <!--{% render_field form.campaign_Title class="form-control" label="{{ form.campaign_Title.label }}" placeholder="Title"%}-->
+
+    <div class="form-group" style="width:80%;margin:auto;">
+      <button type="submit" class="btn btn-success">
+        <span class="glyphicon glyphicon-ok"></span> Launch Your Campaign!
+      </button><br><br>
+      <a href="{% url 'startFundraiser:home' %}" class="btn btn-default">Cancel</a>
+    </div>
+
+  </form>
+{% endblock %}

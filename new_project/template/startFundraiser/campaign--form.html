@@ -1,0 +1,16 @@
+{% extends 'startFundraiser/base.html' %}
+{% block title %}Start your Campaign{% endblock %}
+
+{% block content %}
+                    <form class="/start_campaign/" action="" method="post" enctype="multipart/form-data" >
+                        {% csrf_token %}
+                        {% include 'startFundraiser/form_template.html' %}
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </div>
+
+                        </div>
+                    </form>
+{% endblock %}
+

@@ -1,0 +1,23 @@
+<h1>Donors</h1>
+
+{% for data in context %}
+
+
+
+    {% if data.name  %}
+
+
+            <table class="table"  cellspacing="20px">
+            <tr>
+                <td>{{ data.name}} </td>
+                <td>{{ data.amount }}</td>
+                <td>{{ data.transaction_date }}</td>
+
+            </tr>
+            </table>
+
+    {% elif data.name == NULL %}
+            <h5>no data</h5>
+    {% endif %}
+
+{% endfor %}

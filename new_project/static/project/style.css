@@ -1,0 +1,13 @@
+html {
+  position:relative;
+  min-height:100%;
+}
+body {
+  font-family:'Lucida casual','Comic Sans MS';
+}
+a:hover {
+    color: #F933FF;
+}
+.navbar-brand {
+  font-family: 'Sacramento', cursive;
+}

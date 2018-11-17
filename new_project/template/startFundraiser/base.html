@@ -1,0 +1,181 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- meta tags
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">-->
+        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">-->
+        <!-- Google fonts
+        <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel="stylesheet">
+        <title>{% block title %}IceBreaker{% endblock %}</title>-->
+        <!-- Bootstrap CSS -->
+        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
+        <!-- Custom CSS -->
+        <!--<link rel="stylesheet" href="{% static 'startFundraiser/style.css' %}">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">-->
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css?family=Sacramento" rel="stylesheet">
+        <link rel='stylesheet' href="{% static 'project/style.css' %}"
+
+  </head>
+
+<body>
+        <!-- Header -->
+<!--<header>-->
+
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" >
+  <a class="navbar-brand" href="#" style="color:#F933FF;"><b>CrowdFunding</b></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'project:home' %}"  onMouseOver="this.style.color='#F933FF'"   onMouseOut="this.style.color='black'"><b>Home </b><span class="sr-only">(current)</span></a>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="{% url 'startFundraiser:campaigns' %}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onMouseOver="this.style.color='#F933FF'"   onMouseOut="this.style.color='black'"><b>Explore </b><span class="sr-only">(current)</span></a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="{% url 'startFundraiser:creative' %}" onMouseOver="this.style.color='#F933FF'"   onMouseOut="this.style.color='black'"><b>Creative</b></a>
+        <a class="dropdown-item" href="{% url 'startFundraiser:social' %}" onMouseOver="this.style.color='#F933FF'"   onMouseOut="this.style.color='black'"><b>Social</b></a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="{% url 'startFundraiser:tech' %}" onMouseOver="this.style.color='#F933FF'"   onMouseOut="this.style.color='black'"><b>Innovation</b></a>
+        <a class="dropdown-item" href="#" onMouseOver="this.style.color='#F933FF'"   onMouseOut="this.style.color='black'"><b>Communities</b></a>
+      </div>
+
+    </li>
+
+    <form class="form-inline my-2 my-lg-0" action="{% url 'project:post_list' %}">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+
+
+  </ul>
+  <ul class="navbar-nav">
+    <a href="{% url 'startFundraiser:start_campaign' %}" class="nav-link" onMouseOver="this.style.color='#F933FF'"   onMouseOut="this.style.color='black'"><b>Start Campaign</b> <span class="sr-only">(current)</span></a>
+  </ul>
+  <ul class="navbar-nav">
+    {% if request.user.is_authenticated %}
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {% if request.user.profile.photo %}
+          <img src="{{ request.user.profile.photo.url }}" alt="" class="navbar-img" width="30px" height="35px">
+        {% else %}
+          <img src="{% static 'project/images/user.png' %}" alt="" class="navbar-img" width="30px" height="35px">
+        {% endif %}
+        <span> Hi {{ request.user|capfirst }} </span>
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="{% url 'project:edit_profile' %}" onMouseOver="this.style.color='#F933FF'"   onMouseOut="this.style.color='black'"><b>Profile</b></a>
+        <a class="dropdown-item" href="{% url 'startFundraiser:home' %}" onMouseOver="this.style.color='#F933FF'"   onMouseOut="this.style.color='black'"><b>Campaigns</b></a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="{% url 'project:user_logout' %}" onMouseOver="this.style.color='#F933FF'"   onMouseOut="this.style.color='black'"><b>Logout</b></a>
+      </div>
+    </li>
+    {% else %}
+    <li class="nav-item">
+      <a href="{% url 'project:user_login' %}" class="nav-link" onMouseOver="this.style.color='#F933FF'"   onMouseOut="this.style.color='black'"><b>Login</b> <span class="sr-only">(current)</span></a>
+    </li>
+    {% endif %}
+  </ul>
+
+  </div>
+  </nav>
+  <br><br><br><br>
+
+    <!--
+    <nav class="navbar navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="site-nav-wrapper">
+                <div class="navbar-header">
+                    <form class="navbar-form navbar-right" action="{% url 'startFundraiser:index' %}" name="q" id="q">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Discover" name="q" id="q">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="Submit"><i class="glyphicon glyphicon-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                    <ul class="nav navbar-nav pull-right" id="links">
+                        <li class="nav-item" id="links"><a class="navbar-brand" href="{% url 'startFundraiser:home' %}" >ice<strong>Breaker</strong></a></li>
+                        <li class="nav-item" id="links"><a href="{% url 'startFundraiser:start_campaign' %}">Start Fundraiser</a></li>
+                        <li class="nav-item dropdown" id="links">
+                            <a class="nav-link dropdown-toggle" href="{% url 'startFundraiser:campaigns' %}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Explore
+                            </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                  <a class="dropdown-item" href="{% url 'startFundraiser:creative' %}">Creative</a>
+                                  <a class="dropdown-item" href="{% url 'startFundraiser:social' %}">Social</a>
+                                  <a class="dropdown-item" href="{% url 'startFundraiser:tech' %}">Tech &amp; Innovation</a>
+                                  <div class="dropdown-divider"></div>
+                                  <a class="dropdown-item" href="#">Communities</a>
+                                </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>-->
+        <!-- Header Ends -->
+
+    {% block content %}
+    {% endblock %}
+        <!--Preloader-->
+      <!--  <div id="preloader">
+            <div id="status">&nbsp;</div>
+        </div>
+      -->
+        <!-- Home
+        <section id="home">-->
+            <!-- Background Video -->
+            <!--<video id="home-bg-video" poster="{% static 'startFundraiser/images/help.jpg' %}" autoplay loop muted>
+                <source src="{% static 'startFundraiser/videos/helping.mp4' %}" type="video/mp4">
+            </video>
+
+
+            <div id="home-overlay"></div>
+
+
+        <div id="home-content" class="text-center">
+            <div id ="home-content-inner">
+                <div id="home-heading">
+
+                    <h1 id="home-heading-1"><span>Ice<strong>Breaker</strong></span></h1>
+                    <br>
+                    <h1 id="home-heading-2">Make your ideas live!</h1>
+                    <br><br><br>
+                </div>
+                <div id="home-btn">
+                    <a class="btn btn-general btn-home" href="{% url 'startFundraiser:campaigns' %}" title="Explore" role="button">Explore</a>
+                </div>
+            </div>
+        </div>
+        </section>
+
+
+        <section>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        </section>
+
+
+	    <script src="{% static 'startFundraiser/js/jquery.js' %}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="{% static 'startFundraiser/js/script.js' %}"></script>-->
+    </body>
+</html>

@@ -1,0 +1,70 @@
+{% extends 'startFundraiser/base.html' %}
+{% block title %}{{ campaign1.campaign_Title }}{% endblock %}
+
+{% block content %}
+<div class="container-fluid" style="">
+    <div class="row justify-content-center">
+        <div class="col-lg-6" style="align-content: center">
+                        {% if campaign1.image %}
+                            <img src="{{ campaign1.image.url }}" class="img-responsive" style="width: 100%">
+                        {% else %}
+                            <h3>{{ campaign1.campaign_Title }}</h3>
+                        {% endif %}
+        </div>
+        <div class="col-lg-4">
+                     <h3 style="color: #6c757d">{{ campaign1.campaign_Category }}</h3>
+                     <hr>
+                     <h1>{{ campaign1.campaign_Title }}</h1>
+                     <br>
+                     <h5>{{ campaign1.campaign_Tagline }}</h5>
+                     <br>
+                     <h4 style="color: #6c757d">Campaign Initiator</h4>
+                     <h5>{{ campaign1.user }}</h5>
+                     <br>
+                     <h4 style="color: #6c757d">Goal</h4>
+                     <p>&#8377;{{ campaign1.goal }}</p>
+                     <br>
+                     <p style="color: #6c757d">&#8377;{{ campaign1.pledged }} raised by {{ campaign1.people_pledged }} supporters</p>
+        </div>
+    </div>
+    <br><br><br>
+    <div class="row justify-content-center">
+           <div class="col-lg-3">
+                        {% if campaign1.campaign_Card_Image %}
+                            <img src="{{ campaign1.campaign_Card_Image.url }}" class="img-responsive" style="width: 100%">
+                        {% endif %}
+           </div>
+           <div class="col-lg-5">
+           <h4 style="color: #6c757d">Campaign Outline</h4><hr>
+                     <p>{{ campaign1.overview }}</p>
+           </div>
+    </div>
+    <div class="row justify-content-center">
+
+           <div class="col-lg-8">
+           <br><br>
+           <h4 style="color: #6c757d">Story</h4><hr>
+                     <p>{{ campaign1.story }}</p>
+           </div>
+    </div>
+    <br><br><br>
+        <div class="row justify-content-center">
+
+           <div class="col-lg-10">
+           <br><br>
+           {% if tag %}
+                <h4 style="color: #6c757d">Tags</h4><hr>
+                {% for ind in tag %}
+                     {{ ind }}
+                     &nbsp;
+                {% endfor %}
+           {% endif %}
+           </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+
